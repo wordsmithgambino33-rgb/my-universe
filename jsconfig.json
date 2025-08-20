@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/pages/*": ["./pages/*"],
+      "@/styles/*": ["./styles/*"]
+    },
+    "moduleResolution": "node",
+    "target": "es6",
+    "jsx": "preserve",
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": ["pages/**/*", "components/**/*", "styles/**/*"]
+}
