@@ -6,7 +6,7 @@ const Confirm = () => {
 
   if (!email) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-accent/10 to-base-100 flex items-center justify-center">
         <p className="text-base-content/80">Invalid confirmation link. Please use the link from your email.</p>
       </div>
     );
@@ -21,7 +21,7 @@ const Confirm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 flex items-center justify-center">
+    <div className="min-h-screen bg-linear-to-br from-accent/10 to-base-100 flex items-center justify-center">
       <div className="text-center p-6 bg-base-200 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-primary mb-4">Confirm Subscription</h2>
         <p className="text-base-content/80 mb-4">Click the button below to confirm your subscription for {email}.</p>

@@ -49,7 +49,7 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 relative overflow-hidden">
+      <div className="min-h-screen bg-linear-to-br from-accent/10 to-base-100 relative overflow-hidden">
         {/* Floating Cosmic Elements */}
         <div className="absolute top-10 left-10 w-24 h-24 rounded-full bg-nebula/20 animate-pulse-slow"></div>
         <div className="absolute top-1/4 right-20 w-48 h-48 rounded-full bg-cosmic/20 animate-pulse-slow"></div>

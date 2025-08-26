@@ -24,7 +24,7 @@ const Contact = () => {
         <title>Contact - 🔭 Gambino’s Universe</title>
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 animate-fade-in">
+      <div className="min-h-screen bg-linear-to-br from-accent/10 to-base-100 animate-fade-in">
         {/* Navbar */}
         <nav className="w-full py-6 px-6 sm:px-12 bg-base-100/80 backdrop-blur-md fixed top-0 z-50 shadow-md">
           <div className="container mx-auto flex justify-between items-center">

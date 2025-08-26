@@ -12,7 +12,7 @@ export async function getStaticProps() {
 
 export default function Blog({ articles }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 animate-fade-in">
+    <div className="min-h-screen bg-linear-to-br from-accent/10 to-base-100 animate-fade-in">
       {/* Navbar */}
       <nav className="w-full py-6 px-6 sm:px-12 bg-base-100/80 backdrop-blur-md fixed top-0 z-50 shadow-md">
         <div className="container mx-auto flex justify-between items-center">
@@ -27,7 +27,7 @@ export default function Blog({ articles }) {
       </nav>
 
       {/* Header */}
-      <header className="bg-gradient-to-r from-cosmic to-[#2a2a5d] text-white p-16 text-center relative overflow-hidden mt-20 rounded-b-3xl shadow-lg">
+      <header className="bg-linear-to-r from-cosmic to-[#2a2a5d] text-white p-16 text-center relative overflow-hidden mt-20 rounded-b-3xl shadow-lg">
         <h1 className="text-5xl md:text-6xl font-bold text-nebula animate-nebula-glow">My Published Articles</h1>
         <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-nebula/20 animate-pulse-slow"></div>
         <div className="absolute -bottom-12 -right-12 w-72 h-72 rounded-full bg-cosmic/20 animate-pulse-slow"></div>
@@ -58,7 +58,7 @@ export default function Blog({ articles }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-[#1a1a3d] to-[#0a0a23] text-white py-8 mt-12">
+      <footer className="bg-linear-to-r from-[#1a1a3d] to-[#0a0a23] text-white py-8 mt-12">
         <div className="container mx-auto px-6 text-center">
           <nav className="mb-6 flex justify-center gap-6">
             <Link href="/" className="text-star-dust text-lg hover:text-nebula animate-pulse-slow">Home</Link>

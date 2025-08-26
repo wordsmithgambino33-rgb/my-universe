@@ -27,7 +27,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 relative animate-fade-in debug">
+      <div className="min-h-screen bg-linear-to-br from-accent/10 to-base-100 relative animate-fade-in debug">
       
         <header className="container mx-auto px-6 py-12 text-center animate-slide-down" style={{ opacity: 0, transform: 'translateY(-20px)', transition: 'all 0.6s ease' }}>
           <h1 className="text-4xl md:text-5xl font-bold text-primary">🔭 Welcome to Gambino’s Universe</h1>
