@@ -1,185 +1,75 @@
-import Head from "next/head";
-import { useCallback, useState } from "react";
-import dynamic from "next/dynamic";
+import { motion } from 'framer-motion';
+import { getMediumArticles } from '../lib/external';
+import Link from 'next/link';
 
-let loadSlim;
-try {
-  loadSlim = require("@tsparticles/slim").loadSlim;
-} catch (e) {
-  console.error("Failed to load @tsparticles/slim:", e);
-  loadSlim = () => {};
+export async function getStaticProps() {
+  const articles = await getMediumArticles();
+  return {
+    props: { articles },
+    revalidate: 3600,
+  };
 }
 
-const Particles = dynamic(() => import("@tsparticles/react"), { ssr: false });
-
-export default function Blog() {
-  const particlesInit = useCallback(async (engine) => {
-    try {
-      await loadSlim(engine);
-    } catch (error) {
-      console.error("Failed to initialize tsparticles:", error);
-    }
-  }, []);
-
-  const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
-  const [selectedPost, setSelectedPost] = useState(null);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setImage(reader.result);
-        } else {
-          console.error("Failed to read image file");
-        }
-      };
-      reader.onerror = () => console.error("Error reading image file");
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title.trim() && content.trim()) {
-      setPosts((prevPosts) => [
-        ...prevPosts,
-        { title: title.trim(), content: content.trim(), image, id: Date.now() },
-      ]);
-      setTitle("");
-      setContent("");
-      setImage(null);
-    } else {
-      console.warn("Title and content are required");
-    }
-  };
-
-  const handleReadMore = (id) => {
-    const post = posts.find((p) => p.id === id);
-    if (post) setSelectedPost(post);
-  };
-
+export default function Blog({ articles }) {
   return (
-    <>
-      <Head>
-        <title>Blog | Gambino’s Universe</title>
-        <meta
-          name="description"
-          content="Explore insights, ideas, and stories from Gambino’s Universe."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          fullScreen: { enable: true, zIndex: -1 },
-          background: { color: { value: "transparent" } },
-          particles: {
-            number: { value: 200, density: { enable: true, value_area: 800 } },
-            color: { value: ["#ff6b6b", "#4ecdc4", "#45b7d1", "#96ceb4"] },
-            shape: { type: ["circle", "star", "polygon"], polygon: { nb_sides: 5 } },
-            opacity: { value: 0.7, random: true, anim: { enable: true, speed: 1.5, opacity_min: 0.2, sync: false } },
-            size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.5, sync: false } },
-            move: { enable: true, speed: 1.5, direction: "none", random: true, straight: false, out_mode: "bounce", bounce: true },
-            links: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
-          },
-          interactivity: {
-            events: { onHover: { enable: true, mode: "grab" }, onClick: { enable: true, mode: "push" }, resize: true },
-            modes: { grab: { distance: 200, links: { opacity: 0.5 } }, push: { quantity: 5 } },
-          },
-          detectRetina: true,
-        }}
-      />
-
-      <main className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-cosmic to-base-300 text-base-content px-4 py-8 animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-bold mb-8 text-center text-nebula drop-shadow-lg">
-          Blog
-        </h1>
-
-        {/* Post Creation Form */}
-        <div className="w-full max-w-2xl bg-base-100/90 rounded-xl p-6 shadow-2xl mb-8">
-          <h2 className="text-2xl font-semibold text-nebula mb-4">Create a New Post</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter title"
-              className="w-full p-2 border rounded"
-              required
-            />
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Write your blog content here..."
-              className="w-full p-2 border rounded h-32"
-              required
-            />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full p-2 border rounded"
-            />
-            <button type="submit" className="btn btn-primary w-full">
-              Post
-            </button>
-          </form>
-        </div>
-
-        {/* Post List */}
-        <div className="w-full max-w-2xl">
-          <h2 className="text-2xl font-semibold text-nebula mb-4">Published Posts</h2>
-          {posts.length === 0 ? (
-            <p className="text-base-content/70">No posts yet. Create one above!</p>
-          ) : (
-            <ul className="space-y-4">
-              {posts.map((post) => (
-                <li key={post.id} className="bg-base-100/80 p-4 rounded shadow-md">
-                  <a
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleReadMore(post.id);
-                    }}
-                    className="text-nebula hover:underline font-medium"
-                  >
-                    {post.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Selected Post Details */}
-        {selectedPost && (
-          <div className="w-full max-w-2xl bg-base-100/90 rounded-xl p-6 shadow-2xl mt-8">
-            <h2 className="text-2xl font-semibold text-nebula mb-2">{selectedPost.title}</h2>
-            {selectedPost.image && (
-              <img
-                src={selectedPost.image}
-                alt={selectedPost.title}
-                className="w-full h-64 object-cover rounded mb-4"
-                onError={(e) => console.error("Image failed to load:", e)}
-              />
-            )}
-            <p className="text-base-content/80">{selectedPost.content}</p>
-            <button
-              onClick={() => setSelectedPost(null)}
-              className="btn btn-secondary mt-4"
-            >
-              Back to Posts
-            </button>
+    <div className="min-h-screen bg-gradient-to-br from-accent/10 to-base-100 animate-fade-in">
+      {/* Navbar */}
+      <nav className="w-full py-6 px-6 sm:px-12 bg-base-100/80 backdrop-blur-md fixed top-0 z-50 shadow-md">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl md:text-3xl font-bold text-primary">🔭 Gambino’s Universe</h1>
+          <div className="flex gap-6">
+            <Link href="/" className="font-medium hover:text-accent transition-colors">Home</Link>
+            <Link href="/blog" className="font-medium hover:text-accent transition-colors">Blog</Link>
+            <Link href="/bio" className="font-medium hover:text-accent transition-colors">Bio</Link>
+            <Link href="/contact" className="font-medium hover:text-accent transition-colors">Contact</Link>
           </div>
+        </div>
+      </nav>
+
+      {/* Header */}
+      <header className="bg-gradient-to-r from-cosmic to-[#2a2a5d] text-white p-16 text-center relative overflow-hidden mt-20 rounded-b-3xl shadow-lg">
+        <h1 className="text-5xl md:text-6xl font-bold text-nebula animate-nebula-glow">My Published Articles</h1>
+        <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-nebula/20 animate-pulse-slow"></div>
+        <div className="absolute -bottom-12 -right-12 w-72 h-72 rounded-full bg-cosmic/20 animate-pulse-slow"></div>
+      </header>
+
+      {/* Articles */}
+      <main className="max-w-5xl mx-auto py-12 px-6">
+        {articles.length > 0 ? (
+          <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }} className="grid gap-8">
+            {articles.map((article, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.15, duration: 0.7 }}
+                className="p-6 bg-base-200 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300"
+              >
+                <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-2xl font-semibold text-star-dust hover:text-nebula hover:underline">
+                  {article.title}
+                </a>
+                <p className="text-gray-600 mt-2">{new Date(article.pubDate).toLocaleDateString()}</p>
+              </motion.li>
+            ))}
+          </motion.ul>
+        ) : (
+          <p className="text-center text-gray-500 text-xl animate-pulse-slow mt-12">No articles found. Check back later—it may take a few hours to update.</p>
         )}
       </main>
-    </>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-[#1a1a3d] to-[#0a0a23] text-white py-8 mt-12">
+        <div className="container mx-auto px-6 text-center">
+          <nav className="mb-6 flex justify-center gap-6">
+            <Link href="/" className="text-star-dust text-lg hover:text-nebula animate-pulse-slow">Home</Link>
+            <Link href="/bio" className="text-star-dust text-lg hover:text-nebula animate-pulse-slow">Bio</Link>
+            <Link href="/blog" className="text-star-dust text-lg hover:text-nebula animate-pulse-slow">Blog</Link>
+            <Link href="/contact" className="text-star-dust text-lg hover:text-nebula animate-pulse-slow">Contact</Link>
+          </nav>
+          <p className="text-lg">© 2025 Gambino’s Universe. All rights reserved.</p>
+          <p className="text-lg mt-3 text-nebula animate-nebula-glow">Stay updated—subscribe for more content!</p>
+        </div>
+      </footer>
+    </div>
   );
 }
