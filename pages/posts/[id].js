@@ -51,3 +51,27 @@ export default function Post({ frontMatter, content }) {
     </main>
   );
 }
+return {
+  props: {
+    frontMatter: data,
+    content,
+  },
+};
+}
+
+export default function Post({ frontMatter, content }) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h1>{frontMatter.title || 'Untitled'}</h1>
+      <ReactMarkdown>{content}</ReactMarkdown>
+    </div>
+  );
+}
+
+
