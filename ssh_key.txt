@@ -1,0 +1,2 @@
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPhku7t+aweUFgRskXrEPrzeTut12qQrp9boq3ApFqjc wordsmithgambino33@gmail.com
+
