@@ -1,3 +1,4 @@
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +32,7 @@ const Bio = () => {
 
         <div className="container mx-auto px-6 mt-20">
           <section className="text-center max-w-4xl mx-auto space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: '#87CEEB', animateSlideDown: 'true' }}>About Me</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent transition-colors hover:text-white animate-pulse">About Me</h2>
             <p className="text-lg text-base-content leading-relaxed animate-slide-up">
               I am Stanley Mombera, an aquarius ♒ 🔮 who was dubbed "Gambino" as in the mob boss L😜L. This is my space to share my journey and insights.
             </p>
@@ -52,7 +53,7 @@ const Bio = () => {
 
             {/* Character Upgrades */}
             <div className="mt-8 space-y-6">
-              <h3 className="text-2xl font-semibold" style={{ color: '#87CEEB' }}>Apparently, I come with free character upgrades</h3>
+              <h3 className="text-2xl font-semibold text-accent transition-colors hover:text-white animate-pulse">Apparently, I come with free character upgrades</h3>
               <ul className="grid gap-4">
                 <li className="bg-base-200 p-4 rounded-xl shadow hover:shadow-lg transition-shadow duration-300">
                   <strong className="text-brown font-bold">Opinionated</strong> 💬 <br />
@@ -75,7 +76,7 @@ const Bio = () => {
 
             {/* Timeline */}
             <div className="mt-8 space-y-4">
-              <h3 className="text-2xl font-semibold" style={{ color: '#87CEEB' }}>Timeline</h3>
+              <h3 className="text-2xl font-semibold text-accent transition-colors hover:text-white animate-pulse">Timeline</h3>
               <ul className="bg-base-200 p-6 rounded-xl shadow-lg space-y-2 list-none">
                 <li><strong className="text-brown font-bold">1992</strong>: Born in Mount pleasant, Blantyre👶</li>
                 <li><strong className="text-brown font-bold">2004</strong>: Ceased to be a closet poet and wrote a poem for my mum on her birthday ✍️🎉</li>

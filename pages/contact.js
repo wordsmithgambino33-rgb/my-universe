@@ -47,7 +47,7 @@ const Contact = () => {
 
         {/* Hero */}
         <header className="text-center mt-20 py-16">
-          <h1 className="text-4xl md:text-5xl font-bold" style={{ color: '#87CEEB' }}>Contact Me</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-accent transition-colors hover:text-accent">Contact Me</h1>
           <p className="mt-4 text-lg text-base-content/80">Reach out for collaborations, inquiries, or just to say hello!</p>
         </header>
 
@@ -63,7 +63,7 @@ const Contact = () => {
           </section>
 
           <section className="mt-12 p-8 bg-accent/20 rounded-xl shadow-lg animate-fade-in">
-            <h2 className="text-2xl font-bold" style={{ color: '#87CEEB', textAlign: 'center' }}>Stay Connected</h2>
+            <h2 className="text-2xl font-bold text-accent transition-colors hover:text-accent text-align: 'center'">Stay Connected</h2>
             <p className="mt-2 text-center text-base-content/80">Subscribe to get updates from My Universe.</p>
             <form onSubmit={handleSubscribe} className="mt-6 max-w-md mx-auto flex flex-col sm:flex-row gap-4">
               <input type="email" name="email" placeholder="Enter your email" className="input input-bordered w-full sm:w-auto flex-1" required />

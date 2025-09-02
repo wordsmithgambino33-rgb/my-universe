@@ -28,7 +28,7 @@ export default function Blog({ articles }) {
 
       {/* Header */}
       <header className="bg-gradient-to-r from-cosmic to-[#2a2a5d] text-white p-16 text-center relative overflow-hidden mt-20 rounded-b-3xl shadow-lg">
-        <h1 className="text-5xl md:text-6xl font-bold" style={{ color: '#87CEEB' }}>My Published Articles</h1>
+        <h1 className="text-5xl md:text-6xl font-bold text-accent animate-pulse hover:text-white transition-colors">My Published Articles</h1>
         <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-nebula/20 animate-pulse-slow"></div>
         <div className="absolute -bottom-12 -right-12 w-72 h-72 rounded-full bg-cosmic/20 animate-pulse-slow"></div>
       </header>
@@ -45,7 +45,7 @@ export default function Blog({ articles }) {
                 transition={{ delay: index * 0.15, duration: 0.7 }}
                 className="p-6 bg-base-200 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform duration-300"
               >
-                <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-2xl font-semibold text-star-dust hover:text-nebula hover:underline">
+                <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-2xl font-semibold text-accent animate-pulse hover:text-white transition-colors hover:underline">
                   {article.title}
                 </a>
                 <p className="text-light-green mt-2" style={{ color: '#B03060' }}>{new Date(article.pubDate).toLocaleDateString()}</p>

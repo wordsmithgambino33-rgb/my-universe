@@ -28,6 +28,16 @@ module.exports = {
         'base-200': 'rgba(255, 255, 255, 0.1)',
         cosmic: '#1a1a3d',
         nebula: '#ff6b6b',
+        'sky-blue': '#87CEEB',
+      },
+      animation: {
+        'nebula-glow': 'nebula-glow 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        'nebula-glow': {
+          '0%, 100%': { boxShadow: '0 0 5px #ff6b6b, 0 0 10px #ff6b6b' },
+          '50%': { boxShadow: '0 0 15px #ff6b6b, 0 0 20px #ff6b6b' },
+        },
       },
     },
   },
@@ -35,4 +45,7 @@ module.exports = {
     require('daisyui'),
     require('tailwindcss-animate'),
   ],
+  daisyui: {
+    themes: ['dark'],
+  },
 }
