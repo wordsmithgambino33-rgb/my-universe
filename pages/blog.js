@@ -48,7 +48,7 @@ export default function Blog({ articles }) {
                 <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-2xl font-semibold text-star-dust hover:text-nebula hover:underline">
                   {article.title}
                 </a>
-                <p className="text-gray-600 mt-2">{new Date(article.pubDate).toLocaleDateString()}</p>
+                <p className="text-light-green mt-2" style={{ color: '#B03060' }}>{new Date(article.pubDate).toLocaleDateString()}</p>
               </motion.li>
             ))}
           </motion.ul>
