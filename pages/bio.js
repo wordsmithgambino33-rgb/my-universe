@@ -44,7 +44,7 @@ const Bio = () => {
               onError={(e) => { e.target.src = "/placeholder.png"; }}
             />
             <p className="mt-4 text-lg text-base-content italic leading-relaxed">
-              I am a grandson, brother, nephew, and uncle; a spoken word poet, qualified accountant, financial economist, software engineer, and Manchester United fan. My life has been shaped by family, curiosity, and the lessons that come from both success and loss. I am endlessly curious, always asking questions, exploring new ideas, and seeking to understand the world more deeply.
+              I am a grandson, brother, nephew, and uncle; a spoken word poet, qualified accountant, financial economist, software engineer, and a Manchester United fan. My life has been shaped by family, curiosity, and the lessons that come from both success and loss. I am endlessly curious, always asking questions, exploring new ideas, and seeking to understand the world more deeply.
             </p>
             <p className="mt-4 text-lg text-green-600 italic">
               “I refuse to follow the rules where society tries to control people with low self-esteem.” - Kanye West
