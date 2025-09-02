@@ -1,7 +1,7 @@
 
 import Head from "next/head";
 import Link from "next/link";
-import styles from "../styles/Home.module.css"; // Ensure this path is correct
+import styles from "../styles/Home.module.css"
 
 const Home = () => {
   const handleSubscribe = (e) => {
