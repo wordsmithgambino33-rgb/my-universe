@@ -1,3 +1,4 @@
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
@@ -9,13 +10,15 @@ export default function Layout({ children }) {
     setMounted(true);
   }, []);
 
+  if (!mounted) return null; // Avoids hydration issues
+
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-accent/10 to-base-100">
       <Navbar />
-      <main style={{ minHeight: '80vh', padding: '2rem' }} className="animate-slide-up">
+      <main className="flex-grow animate-slide-up px-6 md:px-12">
         {children}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

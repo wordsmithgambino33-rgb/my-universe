@@ -12,6 +12,35 @@ function MyApp({ Component, pageProps }) {
   const [transitioning, setTransitioning] = useState(false);
 
   useEffect(() => {
+    // Initialize or retrieve visitor data from localStorage
+    let visitors = JSON.parse(localStorage.getItem('visitorData')) || {
+      totalVisits: 0,
+      pageViews: {},
+      lastVisit: new Date().toISOString(),
+    };
+
+    // Increment total visits and track page views
+    const handleRouteChange = () => {
+      visitors.totalVisits += 1;
+      const currentPath = window.location.pathname;
+      visitors.pageViews[currentPath] = (visitors.pageViews[currentPath] || 0) + 1;
+      visitors.lastVisit = new Date().toISOString();
+      localStorage.setItem('visitorData', JSON.stringify(visitors));
+      console.log('Visitor Data:', visitors); // Debug log
+    };
+
+    // Track on initial load and route changes
+    handleRouteChange();
+    const handleRouteChangeComplete = () => handleRouteChange();
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    // Cleanup
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [router]);
+
+  useEffect(() => {
     const handleStart = () => setTransitioning(true);
     const handleStop = () => setTransitioning(false);
     router.events.on('routeChangeStart', handleStart);
