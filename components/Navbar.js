@@ -1,6 +1,7 @@
 
 import Link from 'next/link';
-import { useState, useTheme } from 'next-themes';
+import { useTheme } from 'next-themes';
+import { useState } from 'react'; // Correctly import useState from react
 import dynamic from 'next/dynamic';
 
 const Navbar = () => {
