@@ -15,7 +15,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-accent/10 to-base-100">
       <Navbar />
-      <main className="flex-grow animate-slide-up px-6 md:px-12">
+      <main className="flex-grow animate-slide-up px-4 sm:px-6 md:px-12">
         {children}
       </main>
       <Footer />

@@ -1,15 +1,24 @@
 
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
+import { useState, useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className="bg-cosmic shadow-2xl p-6 flex items-center justify-between sticky top-0 z-50 animate-slide-down" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
       <div className="flex items-center gap-6">
-        <div className="text-2xl font-bold text-nebula animate-nebula-glow">Gambino’s Universe</div>
+        <div className="text-2xl sm:text-3xl font-bold text-nebula animate-nebula-glow">Gambino’s Universe</div>
         
         {/* Desktop links */}
         <div className="hidden md:flex gap-8">
@@ -17,6 +26,7 @@ const Navbar = () => {
             <Link
               key={idx}
               href={href}
+              onClick={handleLinkClick}
               className="text-base-content text-lg hover:text-nebula transition-colors duration-300 font-semibold hover-glow animate-pulse-slow"
             >
               {href === '/' ? 'Home' : href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
@@ -25,15 +35,16 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu toggle */}
-        <label htmlFor="mobile-menu" className="btn btn-circle btn-md md:hidden swap swap-rotate hover-glow" aria-label="Toggle menu">
-          <input type="checkbox" id="mobile-menu" className="hidden peer" />
-          <svg className="fill-current swap-off" width="32" height="32" viewBox="0 0 512 512">
-            <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"></path>
-          </svg>
-          <svg className="fill-current swap-on" width="32" height="32" viewBox="0 0 512 512">
-            <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"></polygon>
-          </svg>
-        </label>
+        <button
+          onClick={toggleMenu}
+          className="md:hidden text-2xl focus:outline-none p-2 rounded-md hover:bg-accent/20 transition-colors"
+          aria-label="Toggle menu"
+          style={{ touchAction: 'manipulation', minWidth: '48px', minHeight: '48px' }}
+        >
+          <span className="block w-6 h-0.5 bg-accent mb-1"></span>
+          <span className="block w-6 h-0.5 bg-accent mb-1"></span>
+          <span className="block w-6 h-0.5 bg-accent"></span>
+        </button>
       </div>
 
       {/* Theme toggle */}
@@ -45,21 +56,23 @@ const Navbar = () => {
         {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
       </button>
 
-      {/* Mobile links */}
-      <div className="md:hidden">
-        <input type="checkbox" id="mobile-menu" className="hidden peer" />
-        <div className="hidden peer-checked:flex flex-col gap-4 absolute top-20 left-0 w-full bg-cosmic p-6 shadow-2xl z-50" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
-          {['/', '/bio', '/blog', '/contact'].map((href, idx) => (
-            <Link
-              key={idx}
-              href={href}
-              className="text-base-content text-lg hover:text-nebula transition-colors duration-300 font-semibold hover-glow"
-            >
-              {href === '/' ? 'Home' : href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
-            </Link>
-          ))}
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-cosmic p-6 shadow-2xl z-40" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
+          <div className="flex flex-col gap-4">
+            {['/', '/bio', '/blog', '/contact'].map((href, idx) => (
+              <Link
+                key={idx}
+                href={href}
+                onClick={handleLinkClick}
+                className="text-base-content text-lg hover:text-nebula transition-colors duration-300 font-semibold hover-glow"
+              >
+                {href === '/' ? 'Home' : href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

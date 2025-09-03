@@ -1,4 +1,5 @@
 
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -32,11 +33,26 @@ module.exports = {
       },
       animation: {
         'nebula-glow': 'nebula-glow 1.5s ease-in-out infinite',
+        'slide-up': 'slide-up 0.5s ease-out',
+        'slide-down': 'slide-down 0.5s ease-out',
+        'fade-in': 'fade-in 0.3s ease-in',
       },
       keyframes: {
         'nebula-glow': {
           '0%, 100%': { boxShadow: '0 0 5px #ff6b6b, 0 0 10px #ff6b6b' },
           '50%': { boxShadow: '0 0 15px #ff6b6b, 0 0 20px #ff6b6b' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(20px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+        'slide-down': {
+          '0%': { transform: 'translateY(-20px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
         },
       },
     },
@@ -48,4 +64,4 @@ module.exports = {
   daisyui: {
     themes: ['dark'],
   },
-}
+};
