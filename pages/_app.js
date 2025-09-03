@@ -6,39 +6,11 @@ import { ThemeProvider } from 'next-themes';
 import Layout from '@/components/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from '../styles/Home.module.css'; // Optional: Import for shared styles
+import { Analytics } from '@vercel/analytics/next';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [transitioning, setTransitioning] = useState(false);
-
-  useEffect(() => {
-    // Initialize or retrieve visitor data from localStorage
-    let visitors = JSON.parse(localStorage.getItem('visitorData')) || {
-      totalVisits: 0,
-      pageViews: {},
-      lastVisit: new Date().toISOString(),
-    };
-
-    // Increment total visits and track page views
-    const handleRouteChange = () => {
-      visitors.totalVisits += 1;
-      const currentPath = window.location.pathname;
-      visitors.pageViews[currentPath] = (visitors.pageViews[currentPath] || 0) + 1;
-      visitors.lastVisit = new Date().toISOString();
-      localStorage.setItem('visitorData', JSON.stringify(visitors));
-      console.log('Visitor Data:', visitors); // Debug log
-    };
-
-    // Track on initial load and route changes
-    handleRouteChange();
-    const handleRouteChangeComplete = () => handleRouteChange();
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
-
-    // Cleanup
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-  }, [router]);
 
   useEffect(() => {
     const handleStart = () => setTransitioning(true);
@@ -58,7 +30,7 @@ function MyApp({ Component, pageProps }) {
       {transitioning && (
         <div className="fixed inset-0 z-50 pointer-events-none bg-cosmic/80 flex items-center justify-center transition-opacity animate-fade-in">
           <motion.div
-            className="w-24 h-24 rounded-full border-8 border-nebula border-t-transparent animate-spin"
+            className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 md:border-8 border-nebula border-t-transparent animate-spin"
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           />
@@ -72,12 +44,13 @@ function MyApp({ Component, pageProps }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="min-h-screen"
+            className="min-h-screen max-w-full mx-auto px-4 sm:px-6 lg:px-8"
           >
             <Component {...pageProps} />
           </motion.div>
         </AnimatePresence>
       </Layout>
+      <Analytics />
     </ThemeProvider>
   );
 }
