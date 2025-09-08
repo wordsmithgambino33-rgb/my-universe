@@ -1,73 +1,58 @@
 
-import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-const Navbar = () => {
-  const { theme, setTheme } = useTheme();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function SpokenWord() {
+  const { theme } = useTheme();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
-  };
+  const videos = [
+    { id: 1, title: 'Who Am I', src: '/videos/who_am_i.mp4', poster: '/posters/who_am_i.png' },
+    { id: 2, title: 'Uncontained', src: '/videos/uncontained.mp4', poster: '/posters/uncontained.png' },
+  ];
 
   return (
-    <nav className="bg-cosmic shadow-2xl p-6 flex items-center justify-between sticky top-0 z-50 animate-slide-down" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
-      <div className="flex items-center gap-6">
-        <div className="text-2xl sm:text-3xl font-bold text-nebula animate-nebula-glow">Gambino’s Universe</div>
-        <div className="hidden md:flex gap-8">
-          {['/', '/bio', '/blog', '/contact', '/spoken-word'].map((href, idx) => (
-            <Link
-              key={idx}
-              href={href}
-              onClick={handleLinkClick}
-              className="text-base-content text-lg hover:text-nebula transition-colors duration-300 font-semibold hover-glow animate-pulse-slow"
-            >
-              {href === '/' ? 'Home' : href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
-            </Link>
-          ))}
-        </div>
-        <button
-          onClick={toggleMenu}
-          className="md:hidden text-2xl focus:outline-none p-2 rounded-md hover:bg-accent/20 transition-colors"
-          aria-label="Toggle menu"
-          style={{ touchAction: 'manipulation', minWidth: '48px', minHeight: '48px' }}
-        >
-          <span className="block w-6 h-0.5 bg-accent mb-1"></span>
-          <span className="block w-6 h-0.5 bg-accent mb-1"></span>
-          <span className="block w-6 h-0.5 bg-accent"></span>
-        </button>
-      </div>
-      <button
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        className="btn btn-outline btn-md text-nebula hover:scale-110 transition-transform duration-300 shadow-lg hover-glow animate-nebula-glow"
-        aria-label="Toggle dark mode"
+    <div className={`min-h-screen bg-gradient-to-br from-accent/10 to-${theme === 'dark' ? 'base-100' : 'cosmic'} px-4 sm:px-6 md:px-12 py-12`}>
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className={`text-4xl sm:text-5xl font-bold ${theme === 'dark' ? 'text-nebula' : 'text-accent'} text-center mb-10 animate-nebula-glow`}
       >
-        {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
-      </button>
-      {isMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-cosmic p-6 shadow-2xl z-40" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
-          <div className="flex flex-col gap-4">
-            {['/', '/bio', '/blog', '/contact', '/spoken-word'].map((href, idx) => (
-              <Link
-                key={idx}
-                href={href}
-                onClick={handleLinkClick}
-                className="text-base-content text-lg hover:text-nebula transition-colors duration-300 font-semibold hover-glow"
-              >
-                {href === '/' ? 'Home' : href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </nav>
+        Spoken Word
+      </motion.h1>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto"
+      >
+        {videos.map((video) => (
+          <motion.div
+            key={video.id}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: video.id * 0.1 }}
+            className={`bg-${theme === 'dark' ? 'cosmic' : 'base-100'} p-4 rounded-lg shadow-2xl hover:shadow-${theme === 'dark' ? 'nebula' : 'accent'} transition-all duration-300`}
+            style={{ background: theme === 'dark' ? 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' : 'linear-gradient(135deg, #f0f0f5 0%, #e0e0e5 70%, #ffffff 100%)' }}
+          >
+            <video
+              controls
+              poster={video.poster}
+              className="w-full h-64 object-cover rounded-md mb-4"
+              onError={(e) => console.log(`Video error for ${video.title}:`, e)}
+            >
+              <source src={video.src} type="video/mp4" />
+              <source src={video.src.replace('.mp4', '.webm')} type="video/webm" />
+              <p>Your browser does not support the video tag. <Link href={video.src} className={`text-${theme === 'dark' ? 'nebula' : 'accent'} underline`}>Download the video</Link>.</p>
+            </video>
+            <h2 className={`text-xl ${theme === 'dark' ? 'text-base-content' : 'text-cosmic'} font-semibold text-center`}>{video.title}</h2>
+            {process.env.NODE_ENV === 'development' && (
+              <p className="text-sm text-red-500">Debug: Check console for video errors.</p>
+            )}
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
-};
-
-export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
+}

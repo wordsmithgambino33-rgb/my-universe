@@ -1,3 +1,4 @@
+
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -18,7 +19,7 @@ export default function SpokenWord() {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className={`text-4xl sm:text-5xl font-bold ${theme === 'dark' ? 'text-nebula' : 'text-accent'} text-center mb-10 animate-nebula-glow`}
       >
-        Spoken Word Collection
+        Spoken Word
       </motion.h1>
       <motion.div
         initial={{ opacity: 0 }}
@@ -39,11 +40,16 @@ export default function SpokenWord() {
               controls
               poster={video.poster}
               className="w-full h-64 object-cover rounded-md mb-4"
+              onError={(e) => console.log(`Video error for ${video.title}:`, e)}
             >
               <source src={video.src} type="video/mp4" />
+              <source src={video.src.replace('.mp4', '.webm')} type="video/webm" />
               <p>Your browser does not support the video tag. <Link href={video.src} className={`text-${theme === 'dark' ? 'nebula' : 'accent'} underline`}>Download the video</Link>.</p>
             </video>
             <h2 className={`text-xl ${theme === 'dark' ? 'text-base-content' : 'text-cosmic'} font-semibold text-center`}>{video.title}</h2>
+            {process.env.NODE_ENV === 'development' && (
+              <p className="text-sm text-red-500">Debug: Check console for video errors.</p>
+            )}
           </motion.div>
         ))}
       </motion.div>
