@@ -6,49 +6,49 @@ import Link from 'next/link';
 export default function SpokenWord() {
   const { theme } = useTheme();
 
-  const videos = [
+  const poems = [
     { id: 1, title: 'Who Am I', src: '/videos/who_am_i.mp4', poster: '/posters/who_am_i.png' },
     { id: 2, title: 'Uncontained', src: '/videos/uncontained.mp4', poster: '/posters/uncontained.png' },
   ];
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-accent/10 to-${theme === 'dark' ? 'base-100' : 'cosmic'} px-4 sm:px-6 md:px-12 py-12`}>
+    <div className={`min-h-screen bg-${theme === 'dark' ? 'cosmic' : 'base-100'} p-6 flex flex-col items-center`}>
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className={`text-4xl sm:text-5xl font-bold ${theme === 'dark' ? 'text-nebula' : 'text-accent'} text-center mb-10 animate-nebula-glow`}
+        className={`text-4xl sm:text-5xl font-bold ${theme === 'dark' ? 'text-nebula' : 'text-accent'} mb-8 text-center`}
+        style={{ color: theme === 'dark' ? '#00ccff' : '#ff6b6b' }} // Explicit colors to match other pages
       >
-        Spoken Word
+        Spoken Word Poetry
       </motion.h1>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.8 }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl"
       >
-        {videos.map((video) => (
+        {poems.map((poem) => (
           <motion.div
-            key={video.id}
+            key={poem.id}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: video.id * 0.1 }}
-            className={`bg-${theme === 'dark' ? 'cosmic' : 'base-100'} p-4 rounded-lg shadow-2xl hover:shadow-${theme === 'dark' ? 'nebula' : 'accent'} transition-all duration-300`}
-            style={{ background: theme === 'dark' ? 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' : 'linear-gradient(135deg, #f0f0f5 0%, #e0e0e5 70%, #ffffff 100%)' }}
+            transition={{ duration: 0.5, delay: poem.id * 0.1 }}
+            className={`bg-${theme === 'dark' ? 'cosmic' : 'base-200'} p-4 rounded-lg shadow-lg`}
           >
             <video
               controls
-              poster={video.poster}
-              className="w-full h-64 object-cover rounded-md mb-4"
-              onError={(e) => console.log(`Video error for ${video.title}:`, e)}
+              poster={poem.poster}
+              className="w-full h-48 object-cover rounded-md"
+              onError={(e) => console.log(`Poetry video error for ${poem.title}:`, e.target.error)}
             >
-              <source src={video.src} type="video/mp4" />
-              <source src={video.src.replace('.mp4', '.webm')} type="video/webm" />
-              <p>Your browser does not support the video tag. <Link href={video.src} className={`text-${theme === 'dark' ? 'nebula' : 'accent'} underline`}>Download the video</Link>.</p>
+              <source src={poem.src} type="video/mp4" />
+              <source src={poem.src.replace('.mp4', '.webm')} type="video/webm" />
+              <p>Video not supported. <Link href={poem.src} className={`text-${theme === 'dark' ? 'nebula' : 'accent'} underline`}>Download</Link>.</p>
             </video>
-            <h2 className={`text-xl ${theme === 'dark' ? 'text-base-content' : 'text-cosmic'} font-semibold text-center`}>{video.title}</h2>
+            <h2 className={`text-xl ${theme === 'dark' ? 'text-base-content' : 'text-cosmic'} font-semibold mt-2 text-center`}>{poem.title}</h2>
             {process.env.NODE_ENV === 'development' && (
-              <p className="text-sm text-red-500">Debug: Check console for video errors.</p>
+              <p className="text-sm text-red-500 mt-1">Debug: Check console for errors.</p>
             )}
           </motion.div>
         ))}
