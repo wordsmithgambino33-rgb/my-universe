@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useState } from 'react'; // Correctly import useState from react
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 const Navbar = () => {
@@ -20,10 +20,8 @@ const Navbar = () => {
     <nav className="bg-cosmic shadow-2xl p-6 flex items-center justify-between sticky top-0 z-50 animate-slide-down" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
       <div className="flex items-center gap-6">
         <div className="text-2xl sm:text-3xl font-bold text-nebula animate-nebula-glow">Gambino’s Universe</div>
-        
-        {/* Desktop links */}
         <div className="hidden md:flex gap-8">
-          {['/', '/bio', '/blog', '/contact'].map((href, idx) => (
+          {['/', '/bio', '/blog', '/contact', '/spoken-word'].map((href, idx) => (
             <Link
               key={idx}
               href={href}
@@ -34,8 +32,6 @@ const Navbar = () => {
             </Link>
           ))}
         </div>
-
-        {/* Mobile menu toggle */}
         <button
           onClick={toggleMenu}
           className="md:hidden text-2xl focus:outline-none p-2 rounded-md hover:bg-accent/20 transition-colors"
@@ -47,8 +43,6 @@ const Navbar = () => {
           <span className="block w-6 h-0.5 bg-accent"></span>
         </button>
       </div>
-
-      {/* Theme toggle */}
       <button
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         className="btn btn-outline btn-md text-nebula hover:scale-110 transition-transform duration-300 shadow-lg hover-glow animate-nebula-glow"
@@ -56,12 +50,10 @@ const Navbar = () => {
       >
         {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
       </button>
-
-      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-cosmic p-6 shadow-2xl z-40" style={{ background: 'linear-gradient(135deg, var(--cosmic) 0%, #2a2a5d 70%, var(--background) 100%)' }}>
           <div className="flex flex-col gap-4">
-            {['/', '/bio', '/blog', '/contact'].map((href, idx) => (
+            {['/', '/bio', '/blog', '/contact', '/spoken-word'].map((href, idx) => (
               <Link
                 key={idx}
                 href={href}
