@@ -1,3 +1,5 @@
+
+/* styles/globals.css */
 @import "tailwindcss";
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -7,9 +9,9 @@
   --background: #0a0a23;
   --foreground: #ffffff;
   --cosmic: #1a1a3d;
-  --nebula: #ff6b6b;
+  --nebula: #ff6b6b; /* Light mode default */
   --star-dust: #4a90e2;
-  --accent: #ff2e63;
+  --accent: #ff2e63; /* Dark mode default */
   --primary: #8B4513;
   --glow: rgba(255, 107, 107, 0.8);
   --base-100: #f0f0f5;
@@ -20,9 +22,9 @@
   --background: #f0f0f5;
   --foreground: #000000;
   --cosmic: #4a90e2;
-  --nebula: #ff2e63;
+  --nebula: #ff2e63; /* Light mode nebula */
   --star-dust: #2a6eb6;
-  --accent: #ff6b6b;
+  --accent: #ff6b6b; /* Light mode accent */
   --primary: #5c2e0a;
   --glow: rgba(255, 46, 99, 0.8);
   --base-100: #ffffff;
@@ -111,6 +113,21 @@ footer.animate-fade-in {
 .text-accent {
   color: var(--accent);
   text-shadow: 0 0 12px rgba(var(--accent), 0.5);
+}
+
+.text-nebula {
+  color: var(--nebula);
+  text-shadow: 0 0 12px rgba(var(--nebula), 0.5);
+}
+
+.text-nebula-hover:hover {
+  color: #ff4040; /* Brighter shade for dark mode hover */
+  text-shadow: 0 0 15px #ff4040, 0 0 25px #ff4040;
+}
+
+.text-accent-hover:hover {
+  color: #ff8787; /* Brighter shade for light mode hover */
+  text-shadow: 0 0 15px #ff8787, 0 0 25px #ff8787;
 }
 
 .shadow-md {
