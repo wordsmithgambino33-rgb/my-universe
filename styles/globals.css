@@ -13,7 +13,7 @@
   --star-dust: #4a90e2;
   --accent: #ff2e63; /* Dark mode default */
   --primary: #8B4513;
-  --glow: rgba(255, 107, 107, 0.8);
+  --glow: rgba(255, 107, 107, 0.8); /* Adjusted to match --nebula */
   --base-100: #f0f0f5;
   --base-200: rgba(255, 255, 255, 0.2);
 }
@@ -26,7 +26,7 @@
   --star-dust: #2a6eb6;
   --accent: #ff6b6b; /* Light mode accent */
   --primary: #5c2e0a;
-  --glow: rgba(255, 46, 99, 0.8);
+  --glow: rgba(255, 46, 99, 0.8); /* Adjusted to match --nebula in light mode */
   --base-100: #ffffff;
   --base-200: rgba(0, 0, 0, 0.08);
 }
