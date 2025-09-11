@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { ThemeProvider } from 'next-themes';
 import Layout from '@/components/Layout';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from '../styles/Home.module.css'; // Optional: Import for shared styles
 import { Analytics } from '@vercel/analytics/next';
 
 function MyApp({ Component, pageProps }) {

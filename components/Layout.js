@@ -12,7 +12,7 @@ export default function Layout({ children }) {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // Avoids hydration issues
+  if (!mounted) return null;
 
   return (
     <div className={`flex flex-col min-h-screen bg-gradient-to-br from-accent/10 to-${theme === 'dark' ? 'cosmic' : 'base-100'}`}>
