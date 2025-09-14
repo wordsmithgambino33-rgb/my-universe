@@ -1,4 +1,3 @@
-
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -30,19 +29,34 @@ export default function Navbar() {
           Gambino's Universe
         </Link>
         <div className="flex items-center space-x-6">
-          <Link href="/" className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} hover:${theme === 'dark' ? 'text-nebula-hover' : 'text-accent-hover'} transition-colors duration-300 hover:underline`}>
+          <Link
+            href="/"
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+          >
             Home
           </Link>
-          <Link href="/bio" className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} hover:${theme === 'dark' ? 'text-nebula-hover' : 'text-accent-hover'} transition-colors duration-300 hover:underline`}>
+          <Link
+            href="/bio"
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+          >
             Bio
           </Link>
-          <Link href="/blog" className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} hover:${theme === 'dark' ? 'text-nebula-hover' : 'text-accent-hover'} transition-colors duration-300 hover:underline`}>
+          <Link
+            href="/blog"
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+          >
             Blog
           </Link>
-          <Link href="/spoken-word" className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} hover:${theme === 'dark' ? 'text-nebula-hover' : 'text-accent-hover'} transition-colors duration-300 hover:underline`}>
+          <Link
+            href="/spoken-word"
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+          >
             Spoken Word
           </Link>
-          <Link href="/contact" className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} hover:${theme === 'dark' ? 'text-nebula-hover' : 'text-accent-hover'} transition-colors duration-300 hover:underline`}>
+          <Link
+            href="/contact"
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+          >
             Contact
           </Link>
           <button
