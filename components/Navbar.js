@@ -31,31 +31,31 @@ export default function Navbar() {
         <div className="flex items-center space-x-6">
           <Link
             href="/"
-            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors hover:text-white animate-pulse hover:underline`}
           >
             Home
           </Link>
           <Link
             href="/bio"
-            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors hover:text-white animate-pulse hover:underline`}
           >
             Bio
           </Link>
           <Link
             href="/blog"
-            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors hover:text-white animate-pulse hover:underline`}
           >
             Blog
           </Link>
           <Link
             href="/spoken-word"
-            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors hover:text-white animate-pulse hover:underline`}
           >
             Spoken Word
           </Link>
           <Link
             href="/contact"
-            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors duration-300 hover:underline hover:text-yellow-400`}
+            className={`${theme === 'dark' ? 'text-nebula' : 'text-accent'} transition-colors hover:text-white animate-pulse hover:underline`}
           >
             Contact
           </Link>
